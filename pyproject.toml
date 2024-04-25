@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "jax-newton-optim"
+version = "0.1.0"
+description = "A brief introduction to optimizing functions with Newton's method in JAX"
+authors = ["Lukas Linauer <l.linauer@gmx.at>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+jax = "^0.4.26"
+plotly = "^5.21.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
