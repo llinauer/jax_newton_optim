@@ -10,6 +10,8 @@ python = "^3.10"
 jax = "^0.4.26"
 plotly = "^5.21.0"
 jaxlib = "^0.4.26"
+imageio = "^2.34.1"
+kaleido = "0.2.1"
 
 
 [build-system]
