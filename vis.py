@@ -33,8 +33,8 @@ def get_tangent_line_points(contact_x: ArrayLike, contact_y: ArrayLike, slope: A
     return tangent_x_vals, np.asarray(tangent_y_vals), x_intersect.item()
 
 
-def visualize_1d(fun: Callable, x_vals: ArrayLike, intermediate_vals: ArrayLike,
-                 grads: ArrayLike) -> go.Figure:
+def plot_1d_interactive(fun: Callable, x_vals: ArrayLike, intermediate_vals: ArrayLike,
+                        grads: ArrayLike) -> go.Figure:
     """ Visualize the optimization procedure of a function with 1 variable"""
 
     # create the frames for visualizing newton's method
