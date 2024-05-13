@@ -13,6 +13,7 @@ jaxlib = "^0.4.26"
 imageio = "^2.34.1"
 kaleido = "0.2.1"
 pillow = "^10.3.0"
+isort = "^5.13.2"
 
 
 [build-system]
