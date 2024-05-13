@@ -5,11 +5,12 @@ Visualize the optimization procedure in 1d & 2d
 """
 
 import os
+from pathlib import Path
 from typing import Callable
-from jax.typing import ArrayLike
+
 import numpy as np
 import plotly.graph_objects as go
-from pathlib import Path
+from jax.typing import ArrayLike
 from PIL import Image
 
 

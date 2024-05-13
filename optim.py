@@ -4,14 +4,16 @@ optim.py
 Contains functions used for optimiziation with Newton's method
 """
 
-import numpy as np
+from pathlib import Path
+from typing import Callable, Tuple
+
 import jax
 import jax.numpy as jnp
+import numpy as np
 from jax.typing import ArrayLike
 from numpy.typing import ArrayLike as NpArrayLike
-from typing import Callable, Tuple
+
 from vis import save_1d_vis
-from pathlib import Path
 
 
 def optimize(fun: Callable, x0: NpArrayLike, max_iterations: int = 100,
