@@ -10,7 +10,8 @@ import jax.numpy as jnp
 from jax.typing import ArrayLike
 from numpy.typing import ArrayLike as NpArrayLike
 from typing import Callable, Tuple
-from vis import plot_1d_interactive
+from vis import save_1d_vis
+from pathlib import Path
 
 
 def optimize(fun: Callable, x0: NpArrayLike, max_iterations: int = 100,
@@ -52,9 +53,7 @@ def main():
 
     # optimize f(x) = x², start at 8
     x_opt, x_vals, grads = optimize(poly, np.array([3.]))
-    fig = plot_1d_interactive(poly, np.arange(-3.5, 3.5, 0.05), x_vals, grads)
-    fig.show()
-
+    save_1d_vis(poly, np.arange(-3.5, 3.5, 0.05), x_vals, grads, Path('img'))
 
 if __name__ == '__main__':
     main()
