@@ -393,4 +393,4 @@ doc = ["reno", "sphinx", "tornado (>=4.5)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "7c065aa22862be4a206334c4cffbabf186bb960e71a0a3f44bff3161cc869a59"
+content-hash = "e574bda53515055b53a108a089e6faf9a37d2a573f06e0f27b7471d7309827e1"
