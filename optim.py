@@ -4,20 +4,23 @@ optim.py
 Contains functions used for optimiziation with Newton's method
 """
 
+import numpy as np
 import jax
 import jax.numpy as jnp
 from jax.typing import ArrayLike
-from typing import Callable
+from numpy.typing import ArrayLike as NpArrayLike
+from typing import Callable, Tuple
+from vis import visualize_1d
 
 
-def optimize(fun: Callable, x0: ArrayLike, max_iterations: int = 100,
-             tol: float = 1e-6) -> ArrayLike:
+def optimize(fun: Callable, x0: NpArrayLike, max_iterations: int = 100,
+             tol: float = 1e-6) -> Tuple[NpArrayLike]:
     """ Search for a local optimum of the given function, starting at x0  """
 
     x = x0
 
-    x_vals = jnp.array([])
-    grads = jnp.array([])
+    x_vals = np.array([])
+    grads = np.array([])
 
     for _ in range(max_iterations):
 
@@ -30,15 +33,15 @@ def optimize(fun: Callable, x0: ArrayLike, max_iterations: int = 100,
         dx = -jnp.linalg.solve(hess, jac[:, None])[:, 0, 0]
         x_new = x + dx
 
-        x_vals = jnp.append(x_vals, x)
-        grads = jnp.append(grads, jac)
+        x_vals = np.append(x_vals, x)
+        grads = np.append(grads, jac)
 
         if abs(x_new - x) < tol:
             break
 
         x = x_new
 
-    return x, x_vals, grads
+    return np.asarray(x), x_vals, grads
 
 
 def poly(x: ArrayLike) -> ArrayLike:
@@ -48,8 +51,9 @@ def poly(x: ArrayLike) -> ArrayLike:
 def main():
 
     # optimize f(x) = x², start at 8
-    x_opt, x_vals, grads = optimize(poly, jnp.array([3.]))
-    print(x_opt, x_vals, grads)
+    x_opt, x_vals, grads = optimize(poly, np.array([3.]))
+    fig = visualize_1d(poly, np.arange(-3.5, 3.5, 0.05), x_vals, grads)
+    fig.show()
 
 
 if __name__ == '__main__':
