@@ -14,6 +14,8 @@ You set the point of interception as your new best guess $x_1$ and iterate.
 Graphically, the method looks like this:
  
 ![newton_graphically.png](images/newton_graphically.png)
+ 
+As you can see, the new best guess $x_1$ is already closer to the root than $x_0$.
 
 To make sense of this mathematically, we can make use of the Taylor expansion of a function.
 The Taylor expansion of a function $f(x)$ around a point $x_i$, consists of an infinite sum of ever-increasing
@@ -42,7 +44,8 @@ So there is how we can actually calculate the new best guess $x_1$.
 The nice thing about Newton's method is, that if you can come up with a good guess,
 then it converges quadratically (meaning, the number of accurate digits roughly doubles at 
  each iteration). Of course, there are some caveats to that; you need to come up with a good guess,
-there are problems calculating the derivative for some functions, etc...
+there are problems calculating the derivative for some functions, you need to handle the case of multiple
+roots, etc...
 Ok, so much for the setup. This repo is about optimization after all, so let's get right to it.
  
 ## Optimization with Newton's method
