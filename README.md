@@ -4,11 +4,11 @@ A brief introduction to optimizing functions with Newton's method in JAX
 ## Newton's method
  
 Those of you who remember your high school's math course, may also remember Newton's method.
-Newton's method is a root-finding algorithm, meaning, you input a function f(x) and Newton's method will output
-the x value, where f(x) = 0.
+Newton's method is a root-finding algorithm, meaning, you input a function $f(x)$ and Newton's method will output
+the $x$ value, where $f(x) = 0$.
  
-The underlying idea is simple and appealing. You start off with an initial guess $x_0$, calculate the
-tangent line to the function f at $x_0$ and calculate the intercept of the tangent with the x-axis.
+The underlying idea is simple and appealing. You start off with an initial guess $x_0$, get the
+tangent line to the function $f$ at $x_0$ and then calculate the intercept of the tangent with the x-axis.
 You set the point of interception as your new best guess $x_1$ and iterate.
  
 Graphically, the method looks like this:
@@ -16,24 +16,23 @@ Graphically, the method looks like this:
 ![newton_graphically.png](images/newton_graphically.png)
 
 To make sense of this mathematically, we can make use of the Taylor expansion of a function.
-The Taylor expansion of a function f(x) around a point x_i, consists of an infinite sum of ever-increasing
-derivatives of f.
+The Taylor expansion of a function $f(x)$ around a point $x_i$, consists of an infinite sum of ever-increasing
+derivatives of $f$.
   
 $$ f(x; x_0) = f(x_0) + f'(x_0) (x - x_0) + \frac{1}{2} f''(x_0) (x-x_0)^2 + ...$$
  
 We can stop this expansion after the first derivative, to get what is called the linear approximation 
-of the function f.
+of the function $f$.
  
 $$ f(x; x_0) \approx f(x_0) + f'(x_0) (x - x_0) + ... $$
  
-This expression is exactly the tangent to f at the point x_0.
+This expression is exactly the tangent to $f$ at the point $x_0$.
 Since we want to get the intersection of the tangent with the x-axis, we 
 can set the above expression to 0, and re-arrange:
  
 $$ f(x; x_0) \approx f(x_0) + f'(x_0) (x - x_0) = 0 $$
- 
-->
-$$ f'(x_0) (x - x_0) = -f(x_0)$$
+
+$$ f'(x_0) (x - x_0) = -f(x_0) $$
 
 $$ x - x_0 = -\frac{f(x_0)}{f'(x_0)} $$
 
