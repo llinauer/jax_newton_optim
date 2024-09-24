@@ -98,7 +98,7 @@ def make_gif(path: Path, name: str) -> None:
         frames.append(Image.open(path/png))
     frame_one = frames[0]
     frame_one.save(f'{path.name}/{name}.gif', format='GIF', append_images=frames, save_all=True,
-                   duration=500)
+                   duration=1000)
 
     for png in path.glob('*.png'):
         png.unlink(missing_ok=True)
