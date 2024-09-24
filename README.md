@@ -40,10 +40,10 @@ $$ x - x_0 = -\frac{f(x_0)}{f'(x_0)} $$
 
 $$ x = x_0 - \frac{f(x_0)}{f'(x_0)} $$
  
-So there is how we can actually calculate the new best guess $x_1$.
+So this is how we can actually calculate the new best guess $x_1$.
 The nice thing about Newton's method is, that if you can come up with a good guess,
 then it converges quadratically (meaning, the number of accurate digits roughly doubles at 
- each iteration). Of course, there are some caveats to that; you need to come up with a good guess,
+ each iteration). Of course, there are some caveats to that; you need to come up with a good guess first,
 there are problems calculating the derivative for some functions, you need to handle the case of multiple
 roots, etc...
 Ok, so much for the setup. This repo is about optimization after all, so let's get right to it.
