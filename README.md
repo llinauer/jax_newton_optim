@@ -27,12 +27,11 @@ uses $x_0=3$ as the initial guess and plots the whole optimization process insid
 By default, plots will be created inside the **img** directory.
 You can check out the optimization process in the **optimization.gif**
 
-# Add gif
+![optimization_example.gif](images%2Foptimization_example.gif)
 
 or use the interactive plotly plot: **optim_interactive.html**
 
-# Add plotly plot
-   
+![interactive_example.png](images%2Finteractive_example.png)
  
 ## Newton's method
  
