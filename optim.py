@@ -13,7 +13,7 @@ import numpy as np
 from jax.typing import ArrayLike
 from numpy.typing import ArrayLike as NpArrayLike
 
-from vis import save_1d_vis
+from vis import plot_1d_interactive, save_1d_vis
 
 
 def optimize(fun: Callable, x0: NpArrayLike, max_iterations: int = 100,
@@ -31,13 +31,13 @@ def optimize(fun: Callable, x0: NpArrayLike, max_iterations: int = 100,
         # at x0
         jac = jax.jacobian(fun)(x)
         hess = jax.hessian(fun)(x)
-    
+
         # calculate the step size dx to take (dx = -H⁻¹ / J)
         dx = -jnp.linalg.solve(hess, jac[:, None])[:, 0, 0]
         x_new = x + dx
 
         x_vals = np.append(x_vals, x)
-        grads = np.append(grads, jac)
+        grads = np.append(grads, hess.item())
 
         if abs(x_new - x) < tol:
             break
@@ -53,9 +53,10 @@ def poly(x: ArrayLike) -> ArrayLike:
 
 def main():
 
-    # optimize f(x) = x², start at 8
+    # optimize f(x)
     x_opt, x_vals, grads = optimize(poly, np.array([3.]))
     save_1d_vis(poly, np.arange(-3.5, 3.5, 0.05), x_vals, grads, Path('img'))
+    plot_1d_interactive(poly, np.arange(-3.5, 3.5, 0.05), x_vals, grads, Path('img'))
 
 if __name__ == '__main__':
     main()
