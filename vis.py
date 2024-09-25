@@ -4,7 +4,6 @@ vis.py
 Visualize the optimization procedure in 1d & 2d
 """
 
-import os
 from pathlib import Path
 from typing import Callable
 
@@ -65,26 +64,26 @@ def plot_1d_interactive(fun: Callable, x_vals: ArrayLike, intermediate_vals: Arr
         y_intersect = jax.grad(fun)(x_intersect)
 
         # create a frame with the tangent and its intersection with the x-axis
-        frame_data.append(go.Scatter(x=[x], y=[jax.grad(fun)(x)], mode='markers',
-                                     marker=dict(color='red', symbol='x')))
-        frame_data.append(go.Scatter(x=x_vals, y=first_derivative, mode='lines',
-                                     line=dict(width=2, color='orange', dash='dot')))
+        frame_data.append(go.Scatter(x=[x], y=[jax.grad(fun)(x)], mode="markers",
+                                     marker=dict(color="red", symbol="x")))
+        frame_data.append(go.Scatter(x=x_vals, y=first_derivative, mode="lines",
+                                     line=dict(width=2, color="orange", dash="dot")))
         # in the last step, don't plot the tangent line
         # instead, plot a vertical line
         if i < len(grads) - 1:
-            frame_data.append(go.Scatter(x=tx, y=ty, mode='lines', line=dict(color='red', width=1)))
+            frame_data.append(go.Scatter(x=tx, y=ty, mode="lines", line=dict(color="red", width=1)))
         else:
             vert_x = [x, x]
             vert_y = [y_ranges[0], y_ranges[1]]
-            frame_data.append(go.Scatter(x=vert_x, y=vert_y, mode='lines',
-                                         line=dict(color='green', width=1)))
+            frame_data.append(go.Scatter(x=vert_x, y=vert_y, mode="lines",
+                                         line=dict(color="green", width=1)))
 
-        frame_data.append(go.Scatter(x=[x_intersect], y=[y_intersect], mode='markers',
-                                     marker=dict(color='green', symbol='x')))
-        frame_data.append(go.Scatter(x=[x_intersect, x_intersect], y=[0, y_intersect], mode='lines',
-                                     line=dict(color='green', dash='dash')))
-        frame_data.append(go.Scatter(x=x_vals, y=fun(x_vals), mode='lines',
-                                     line=dict(width=2, color='blue')))
+        frame_data.append(go.Scatter(x=[x_intersect], y=[y_intersect], mode="markers",
+                                     marker=dict(color="green", symbol="x")))
+        frame_data.append(go.Scatter(x=[x_intersect, x_intersect], y=[0, y_intersect], mode="lines",
+                                     line=dict(color="green", dash="dash")))
+        frame_data.append(go.Scatter(x=x_vals, y=fun(x_vals), mode="lines",
+                                     line=dict(width=2, color="blue")))
 
         slider_step = {"args": [
             [i],
@@ -101,8 +100,8 @@ def plot_1d_interactive(fun: Callable, x_vals: ArrayLike, intermediate_vals: Arr
     # create layout
     layout = go.Layout(
         title="Interactive optimization",
-        xaxis=dict(title='x', range=x_ranges),
-        yaxis=dict(title='y', range=y_ranges),
+        xaxis=dict(title="x", range=x_ranges),
+        yaxis=dict(title="y", range=y_ranges),
         updatemenus=[
             {
                 "buttons": [
@@ -163,14 +162,14 @@ def plot_1d_interactive(fun: Callable, x_vals: ArrayLike, intermediate_vals: Arr
 
     # save figure at path
     path.mkdir(parents=True, exist_ok=True)
-    fig.write_html(path/'optim_interactive.html')
+    fig.write_html(path/"optim_interactive.html")
 
 
 def make_gif(path: Path, name: str) -> None:
     """ Create a .gif from all .pngs found in the path """
 
     # get all .pngs in path
-    img_list = list(path.glob('*.png'))
+    img_list = list(path.glob("*.png"))
     img_list.sort()
     frames = []
 
@@ -181,10 +180,10 @@ def make_gif(path: Path, name: str) -> None:
     for png_path in img_list:
         frames.append(Image.open(png_path))
     frame_one = frames[0]
-    frame_one.save(f'{path.name}/{name}.gif', format='GIF', append_images=frames, save_all=True,
+    frame_one.save(f"{path.name}/{name}.gif", format="GIF", append_images=frames, save_all=True,
                    duration=1000, loop=0)
 
-    for png in path.glob('*.png'):
+    for png in path.glob("*.png"):
         png.unlink(missing_ok=True)
 
 
@@ -212,13 +211,13 @@ def save_1d_vis(fun: Callable, x_vals: ArrayLike,
         fig = go.Figure(layout=layout)
         # plot the function
         fig.add_trace(
-            go.Scatter(x=x_vals, y=fun(x_vals), mode='lines', line=dict(width=2, color='blue'))
+            go.Scatter(x=x_vals, y=fun(x_vals), mode="lines", line=dict(width=2, color="blue"))
         )
 
         # plot the first derivative
         fig.add_trace(
-            go.Scatter(x=x_vals, y=first_derivative, mode='lines',
-                       line=dict(width=2, color='orange', dash='dot'))
+            go.Scatter(x=x_vals, y=first_derivative, mode="lines",
+                       line=dict(width=2, color="orange", dash="dot"))
         )
 
         # for each x-value, calculate the tangent line
@@ -228,26 +227,26 @@ def save_1d_vis(fun: Callable, x_vals: ArrayLike,
         y_intersect = fun(x_intersect)
 
         # create a frame with the tangent and its intersection with the x-axis
-        fig.add_trace(go.Scatter(x=[x], y=[jax.grad(fun)(x).item()], mode='markers',
-                                 marker=dict(color='red', symbol='x')))
+        fig.add_trace(go.Scatter(x=[x], y=[jax.grad(fun)(x).item()], mode="markers",
+                                 marker=dict(color="red", symbol="x")))
 
         # in the last step, don't plot the tangent line
         # instead, plot a vertical line
         if i < len(grads) - 1:
-            fig.add_trace(go.Scatter(x=tx, y=ty, mode='lines', line=dict(color='red', width=1)))
+            fig.add_trace(go.Scatter(x=tx, y=ty, mode="lines", line=dict(color="red", width=1)))
         else:
             vert_x = [x, x]
             vert_y = [y_ranges[0], y_ranges[1]]
-            fig.add_trace(go.Scatter(x=vert_x, y=vert_y, mode='lines', line=dict(color='green', width=1)))
+            fig.add_trace(go.Scatter(x=vert_x, y=vert_y, mode="lines", line=dict(color="green", width=1)))
 
-        fig.add_trace(go.Scatter(x=[x_intersect], y=[y_intersect], mode='markers',
-                                 marker=dict(color='green', symbol='x')))
-        fig.add_trace(go.Scatter(x=[x_intersect, x_intersect], y=[0, y_intersect], mode='lines',
-                                 line=dict(color='green', dash='dash')))
+        fig.add_trace(go.Scatter(x=[x_intersect], y=[y_intersect], mode="markers",
+                                 marker=dict(color="green", symbol="x")))
+        fig.add_trace(go.Scatter(x=[x_intersect, x_intersect], y=[0, y_intersect], mode="lines",
+                                 line=dict(color="green", dash="dash")))
 
         # if the path does not exist, create it
         path.mkdir(parents=True, exist_ok=True)
-        fig.write_image(path/f'{i}.png')
+        fig.write_image(path/f"{i}.png")
 
     # create a .gif out of all .pngs
-    make_gif(path, 'optimization')
+    make_gif(path, "optimization")

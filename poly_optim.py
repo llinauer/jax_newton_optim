@@ -76,5 +76,5 @@ def main() -> None:
     plot_1d_interactive(poly_func, np.arange(-3.5, 3.5, 0.05), x_vals, grads, Path(args.save_path))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
