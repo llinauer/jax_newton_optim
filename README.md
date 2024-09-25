@@ -1,5 +1,38 @@
 # jax_newton_optim
+
 A brief introduction to optimizing functions with Newton's method in JAX
+
+## Usage
+
+Pre-requisites: poetry (see: https://python-poetry.org)
+
+Install requirements:
+
+    cd /path/to/git_repo
+    poetry shell   # creates a virtual environment and activates it
+    poetry install # installs required packages from poetry.lock
+
+You can use **poly_optim.py** to visualize the optimization with Newton's method on a polynomial.
+
+E.g.:
+
+    python3 poly_optim.py --coeff 1 3 -3 2 --x-start 3 --x-range -3.5 3.5
+
+Calling poly_optim.py with these arguments creates a polynomial of the form
+
+$$ x^3 + 3x^2 - 3x + 2 $$
+
+uses $x_0=3$ as the initial guess and plots the whole optimization process inside an x-range of $[-3.5, 3.5]$.
+
+By default, plots will be created inside the **img** directory.
+You can check out the optimization process in the **optimization.gif**
+
+# Add gif
+
+or use the interactive plotly plot: **optim_interactive.html**
+
+# Add plotly plot
+   
  
 ## Newton's method
  
@@ -110,9 +143,3 @@ That's basically all it does. You can check out the function, it is super simple
 formula into code.
 
 **vis.py**  contains functions for visualizing the optimization process. It uses plotly and Pillow for that.
-
-You can easily visualize the optimization for a function of your choice by editing the **main** function 
-in **optimize.py**
-For example, consider the polynom: 
-
-$$ 
