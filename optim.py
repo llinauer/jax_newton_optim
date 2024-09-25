@@ -41,4 +41,3 @@ def optimize(fun: Callable, x0: NpArrayLike, max_iterations: int = 100,
         x = x_new
 
     return np.asarray(x), x_vals, grads
-

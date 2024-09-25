@@ -4,12 +4,11 @@ poly_optim.py
 User interface for optimizing polynomials
 """
 
-from pathlib import Path
-
 import argparse
-import numpy as np
-
+from pathlib import Path
 from typing import Callable
+
+import numpy as np
 from jax.typing import ArrayLike
 
 from optim import optimize
@@ -17,6 +16,12 @@ from vis import plot_1d_interactive, save_1d_vis
 
 
 def parse_args() -> argparse.Namespace:
+    """ Parse CL arguments:
+        --coeff (int, int, ...)  -    Polynomial coefficients
+        --x-range (float, float) -    [x_min, x_max]
+        --x-start (float)        -    Initial guess for Newton's method
+        --save-path (str)        -    Save created files at this path
+    """
 
     parser = argparse.ArgumentParser(description="Find the optimum of a polynomial using Newton's method")
     parser.add_argument("--coeff", nargs="+", type=int, help="Coefficients of the polynomial",
@@ -36,6 +41,7 @@ def create_polynomial(*coeffs) -> Callable:
     """ Wrapper functions that creates a polynomial functions out of the coefficients"""
 
     def polynomial(x: ArrayLike) -> ArrayLike:
+        # calculate the polynomial function at x
         result = 0
         degree = len(coeffs) - 1
         for i, coeff in enumerate(coeffs):
@@ -46,6 +52,7 @@ def create_polynomial(*coeffs) -> Callable:
 
 
 def main() -> None:
+    """ Main function and User interface """
 
     # parse CL args
     args = parse_args()
@@ -64,7 +71,7 @@ def main() -> None:
     x_range = np.linspace(x_range[0], x_range[1], 100)
 
     # optimize polynomial
-    x_opt, x_vals, grads = optimize(poly_func, np.array([args.x_start]))
+    _, x_vals, grads = optimize(poly_func, np.array([args.x_start]))
     save_1d_vis(poly_func, x_range, x_vals, grads, Path(args.save_path))
     plot_1d_interactive(poly_func, np.arange(-3.5, 3.5, 0.05), x_vals, grads, Path(args.save_path))
 
