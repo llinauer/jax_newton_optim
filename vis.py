@@ -170,15 +170,19 @@ def make_gif(path: Path, name: str) -> None:
     """ Create a .gif from all .pngs found in the path """
 
     # get all .pngs in path
-    img_list = os.listdir(path)
+    img_list = list(path.glob('*.png'))
     img_list.sort()
     frames = []
 
-    for png in img_list:
-        frames.append(Image.open(path/png))
+    # if optimization.gif already exists, overwrite
+    if (path/"optimization.gif").exists():
+        (path/"optimization.gif").unlink()
+
+    for png_path in img_list:
+        frames.append(Image.open(png_path))
     frame_one = frames[0]
     frame_one.save(f'{path.name}/{name}.gif', format='GIF', append_images=frames, save_all=True,
-                   duration=1000)
+                   duration=1000, loop=0)
 
     for png in path.glob('*.png'):
         png.unlink(missing_ok=True)
