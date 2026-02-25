@@ -20,9 +20,9 @@ E.g.:
 
 Calling poly_optim.py with these arguments creates a polynomial of the form
 
-\[
+$$
 x^3 + 3x^2 - 3x + 2
-\]
+$$
 
 uses $x_0=3$ as the initial guess and plots the whole optimization process inside an x-range of $[-3.5, 3.5]$.
 
@@ -55,36 +55,36 @@ To make sense of this mathematically, we can make use of the Taylor expansion of
 The Taylor expansion of a function $f(x)$ around a point $x_i$, consists of an infinite sum of ever-increasing
 derivatives of $f$.
   
-\[
+$$
 f(x; x_0) = f(x_0) + f'(x_0) (x - x_0) + \frac{1}{2} f''(x_0) (x-x_0)^2 + ...
-\]
+$$
  
 We can stop this expansion after the first derivative, to get what is called the linear approximation 
 of the function $f$.
  
-\[
+$$
 f(x; x_0) \approx f(x_0) + f'(x_0) (x - x_0) + ...
-\]
+$$
  
 This expression is exactly the tangent to $f$ at the point $x_0$.
 Since we want to get the intersection of the tangent with the x-axis, we 
 can set the above expression to 0, and re-arrange:
  
-\[
+$$
 f(x; x_0) \approx f(x_0) + f'(x_0) (x - x_0) = 0
-\]
+$$
 
-\[
+$$
 f'(x_0) (x - x_0) = -f(x_0)
-\]
+$$
 
-\[
+$$
 x - x_0 = -\frac{f(x_0)}{f'(x_0)}
-\]
+$$
 
-\[
+$$
 x = x_0 - \frac{f(x_0)}{f'(x_0)}
-\]
+$$
  
 So this is how we can actually calculate the new best guess $x_1$.
 The nice thing about Newton's method is, that if you can come up with a good guess,
@@ -101,9 +101,9 @@ Optimization deals with finding those arguments $x$ of a function $f(x)$, where 
 Basic calculus teaches us that a necessary condition for a point $x_0$ of a
 function $f(x)$ to be an optimum, is that the first derivative of this function is zero at that point. In short:
 
-\[
+$$
 f'(x)|x_0 = 0
-\]
+$$
 
 This means, that if we can find those points $x_i$ of $f(x)$, where the first derivative is 0, then we have found an
 optimum! (Note: It is not guaranteed to be an optimum. It could e.g. also be a saddle point, but we will leave that aside for now)
@@ -112,27 +112,27 @@ However, this time we are not concerned with the function $f(x)$ itself, but wit
 
 If we follow the same approach as above and do the Taylor expansion but this time of $f'(x)$, we get:
 
-\[
+$$
 f'(x; x_0) \approx f'(x_0) + f''(x_0) (x - x_0)
-\]
+$$
 
 We set this expression to 0 and re-arrange:
 
-\[
+$$
 f'(x_0) + f''(x_0) (x - x_0) = 0
-\]
+$$
 
-\[
+$$
 f''(x_0) (x - x_0) = -f'(x_0)
-\]
+$$
 
-\[
+$$
 x - x_0 = -\frac{f'(x_0)}{f''(x_0)}
-\]
+$$
 
-\[
+$$
 x = x_0 - \frac{f'(x_0)}{f''(x_0)}
-\]
+$$
 
 So starting from an initial guess $x_0$, we can arrive at the next best estimation by dividing the first derivative $f'(x)$
 by the second derivative $f''(x)$.
@@ -144,9 +144,9 @@ How come Newton's method is used so seldom in Machine Learning?
 One big (pun intended) drawback of Newton's method is its memory requirements.
 If we look at the multivariate case, then Newton's method looks like this:
 
-\[
+$$
 \vec{x} = \vec{x}_0 - H^{-1} f(\vec{x}) \nabla f(x)
-\]
+$$
 
 In this equation, the inverse of the Hessian (= matrix of second derivatives) and the gradient enter.
 The Hessian of a function $f(\vec{x})$ of $n$ variables is an $n$ x $n$ - matrix.
